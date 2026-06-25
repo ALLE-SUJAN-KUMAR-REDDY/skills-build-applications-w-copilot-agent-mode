@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 import { extractCollection } from '../api'
 
-const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim()
-const apiBase = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev`
-  : 'http://localhost:8000'
-const workoutsEndpoint = `${apiBase}/api/workouts/`
+const workoutsEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/workouts/`
+  : 'http://localhost:8000/api/workouts/'
 
 function Workouts() {
   const [workouts, setWorkouts] = useState([])
