@@ -1,6 +1,6 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import { getApiBaseUrl } from './config/apiBaseUrl';
+import { connectDatabase } from './config/database';
 import activitiesRouter from './routes/activitiesRoutes';
 import leaderboardRouter from './routes/leaderboardRoutes';
 import teamsRouter from './routes/teamsRoutes';
@@ -9,7 +9,6 @@ import workoutsRouter from './routes/workoutsRoutes';
 
 const app = express();
 const port = Number(process.env.PORT) || 8000;
-const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/octofit_db';
 
 app.use(express.json());
 
@@ -34,7 +33,7 @@ app.use((err: unknown, _req: express.Request, res: express.Response, _next: expr
 
 const startServer = async (): Promise<void> => {
   try {
-    await mongoose.connect(mongoUri);
+    await connectDatabase();
     app.listen(port, () => {
       console.log(`API listening on ${getApiBaseUrl()}`);
     });
