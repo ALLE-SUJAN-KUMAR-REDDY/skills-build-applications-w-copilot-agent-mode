@@ -8,7 +8,7 @@ import usersRouter from './routes/usersRoutes';
 import workoutsRouter from './routes/workoutsRoutes';
 
 const app = express();
-const port = Number(process.env.PORT) || 8000;
+const port = 8000;
 
 app.use(express.json());
 
