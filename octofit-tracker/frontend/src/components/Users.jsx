@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react'
-import { buildApiUrl, extractCollection } from '../api'
+import { extractCollection } from '../api'
+
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim()
+const apiBase = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : 'http://localhost:8000'
+const usersEndpoint = `${apiBase}/api/users/`
 
 function Users() {
   const [users, setUsers] = useState([])
@@ -12,7 +18,7 @@ function Users() {
       setError('')
 
       try {
-        const response = await fetch(buildApiUrl('users'))
+        const response = await fetch(usersEndpoint)
         if (!response.ok) {
           throw new Error(`Request failed (${response.status})`)
         }
