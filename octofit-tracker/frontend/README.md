@@ -1,16 +1,18 @@
-# React + Vite
+# OctoFit Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This React 19 app uses `react-router-dom` and loads API data from the backend.
 
-Currently, two official plugins are available:
+## Environment setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+`VITE_CODESPACE_NAME` must be defined when using a GitHub Codespace backend URL.
 
-## React Compiler
+Example `.env.local`:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+VITE_CODESPACE_NAME=your-codespace-name
+```
 
-## Expanding the Oxlint configuration
+The app will call:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- `https://${VITE_CODESPACE_NAME}-8000.app.github.dev/api/[component]/` when `VITE_CODESPACE_NAME` is set.
+- `http://localhost:8000/api/[component]/` as a safe fallback when `VITE_CODESPACE_NAME` is unset.
